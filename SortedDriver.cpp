@@ -3,7 +3,8 @@
 // tom bailey   1445  25 mar 2014
 // Construct sorted sequences and call functions that 
 //   process the sorted sequences.
-
+//last edited by Kole Earhart
+//10/31/17
 
 #include "RandomUtilities.h"
 #include "ContainerPrinting.h"
@@ -63,9 +64,61 @@ getWords(size_t numWords, size_t wordLength, string alphabet)
 double
 mostIsolated(vector<double> & number)
 {
-	// STUB  STUB  STUB
-	return -123.456;
+	double iso(0);
+	double max(0);
+	int temp(0);
+
+	for (int i = 0; i < number.size(); ++i){
+
+		if (i == (number.size() - 1.0)) {
+
+			iso = abs(number[i] - number[i - 1.0]);
+
+		}
+
+		else if (i == 0) {
+
+			iso = abs(number[i] - number[i + 1.0]);
+
+		}
+
+		else{
+
+			double left = abs(number[i] - number[i - 1.0]);
+
+			double right = abs(number[i] - number[i + 1.0]);
+
+			if (left > right) {
+
+				iso = right;
+
+			}
+
+			else {
+
+				iso = left;
+
+			}
+
+		}
+
+		if (iso > max){
+
+			max = iso;
+
+			temp = i;
+			}
+
+	}
+
+
+
+	return number[temp];
+
 }
+
+
+
 
 
 // pre:  A and B are sorted.
@@ -74,8 +127,40 @@ mostIsolated(vector<double> & number)
 int
 unmatched(list<string> & A, list<string> & B)
 {
-	// STUB  STUB  STUB
-	return -1;
+	int x = 0;
+
+	list<string>::iterator itB = B.begin();
+
+	list<string>::iterator itA = A.begin();
+
+
+
+	while (itA != A.end())
+
+	{
+
+		if (*itB == *itA)
+
+			itA++;
+
+		else if (*itB > *itA)
+
+		{
+
+			x++;
+
+			*itA++;
+
+		}
+
+		else
+
+			itB++;
+
+	}
+
+	return x;
+
 }
 
 
